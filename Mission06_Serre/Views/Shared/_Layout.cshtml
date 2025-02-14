@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Character encoding for proper text display -->
+    <meta charset="utf-8" />
+
+    <!-- Ensures responsive design on different devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Dynamic page title -->
+    <title>@ViewData["Title"] - Mission06_Serre</title>
+
+    <!-- Bootstrap CSS for styling -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Custom site-wide CSS -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <!-- Additional styles for this specific project -->
+    <link rel="stylesheet" href="~/Mission06_Serre.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <!-- A shared navigation menu to each page on the site -->
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <!-- Website title/logo linking to the homepage -->
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Mission06_Serre</a>
+
+                <!-- Mobile-friendly collapsible menu button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Navigation Links -->
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between" id="navbarSupportedContent">
+                    <ul class="navbar-nav flex-grow-1">
+                        <!-- Home page link -->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+
+                        <!-- "Get to Know Joel" page link -->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="GetToKnowJoel">Get to Know Joel</a>
+                        </li>
+
+                        <!-- Movie Collection Form page link -->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="MovieCollection">Movie Collection Form</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main content container -->
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody() <!-- This will render the content from child views -->
+        </main>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - Mission06_Serre
+        </div>
+    </footer>
+
+    <!-- jQuery and Bootstrap JavaScript (needed for interactive elements like navbar collapse) -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom site-wide JavaScript -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- Placeholder for additional scripts that specific pages may require -->
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

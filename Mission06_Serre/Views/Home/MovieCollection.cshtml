@@ -1,0 +1,75 @@
+﻿@model Movie
+
+<h1 class="text-center my-4">Movie Collection Form</h1>
+
+<form method="post" class="container card p-4 shadow-lg w-50">
+    <!-- Category input (Required) -->
+    <div class="mb-3">
+        <label asp-for="Category" class="form-label">Category</label>
+        <input asp-for="Category" class="form-control w-75" required />
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </div>
+
+    <!-- Title input (Required) -->
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label">Title</label>
+        <input asp-for="Title" class="form-control w-75" required />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <!-- Year input (Required) -->
+    <div class="mb-3">
+        <label asp-for="Year" class="form-label">Year</label>
+        <input asp-for="Year" type="number" class="form-control w-50" required />
+        <span asp-validation-for="Year" class="text-danger"></span>
+    </div>
+
+    <!-- Director input (Required) -->
+    <div class="mb-3">
+        <label asp-for="Director" class="form-label">Director</label>
+        <input asp-for="Director" class="form-control w-75" required />
+        <span asp-validation-for="Director" class="text-danger"></span>
+    </div>
+
+    <!-- Rating dropdown (Required) -->
+    <div class="mb-3">
+        <label asp-for="Rating" class="form-label">Rating</label>
+        <select asp-for="Rating" class="form-select w-50" required>
+            <option value="">-- Select a Rating --</option>
+            <option value="G">G</option>
+            <option value="PG">PG</option>
+            <option value="PG-13">PG-13</option>
+            <option value="R">R</option>
+        </select>
+        <span asp-validation-for="Rating" class="text-danger"></span>
+    </div>
+
+    <!-- Edited radio buttons (Optional) Yes/No options as Boolean-->
+    <div class="mb-3">
+        <label asp-for="Edited" class="form-label">Edited</label>
+        <div class="form-check">
+            <input asp-for="Edited" type="radio" class="form-check-input" value="true" id="editedYes" />
+            <label for="editedYes" class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check">
+            <input asp-for="Edited" type="radio" class="form-check-input" value="false" id="editedNo" />
+            <label for="editedNo" class="form-check-label">No</label>
+        </div>
+    </div>
+
+    <!-- Lent To input (Optional) -->
+    <div class="mb-3">
+        <label asp-for="LentTo" class="form-label">Lent To</label>
+        <input asp-for="LentTo" class="form-control w-75" />
+    </div>
+
+    <!-- Notes input (Optional, max 25 characters) -->
+    <div class="mb-3">
+        <label asp-for="Notes" class="form-label">Notes (Max 25 characters)</label>
+        <input asp-for="Notes" class="form-control w-75" maxlength="25" />
+    </div>
+
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary">Submit Movie Collection Form</button>
+</form>
+
