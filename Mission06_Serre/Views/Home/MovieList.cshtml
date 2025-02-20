@@ -1,0 +1,45 @@
+﻿
+@model List<Movie>
+
+<h1 class="text-center my-4">Movie Collection</h1>
+
+<!-- Bootstrap-styled table -->
+<table class="table table-bordered table-striped table-hover shadow-lg">
+    <thead class="table-dark text-center">
+        <tr>
+            <th>Category</th>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Director</th>
+            <th>Rating</th>
+            <th>Edited</th>
+            <th>Lent To</th>
+            <th>Copied To Plex</th>
+            <th>Notes</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@(m.Category?.CategoryName ?? "N/A")</td>
+                <td>@m.Title</td>
+                <td>@m.Year</td>
+                <td>@(string.IsNullOrEmpty(m.Director) ? "N/A" : m.Director)</td>
+                <td>@(string.IsNullOrEmpty(m.Rating) ? "N/A" : m.Rating)</td>
+                <td>@(m.Edited ? "Yes" : "No")</td>
+                <td>@(string.IsNullOrEmpty(m.LentTo) ? "N/A" : m.LentTo)</td>
+                <td>@(m.CopiedToPlex ? "Yes" : "No")</td>
+                <td>@(string.IsNullOrEmpty(m.Notes) ? "N/A" : m.Notes)</td>
+
+                <!-- Action buttons for Edit and Delete -->
+                <td>
+                    <a class="btn btn-info btn-sm mx-1" asp-controller="Home" asp-action="Edit" asp-route-id="@m.MovieId">Edit</a>
+                    <a class="btn btn-danger btn-sm mx-1" asp-controller="Home" asp-action="Delete" asp-route-id="@m.MovieId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
