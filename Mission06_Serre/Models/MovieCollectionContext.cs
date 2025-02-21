@@ -17,6 +17,7 @@ namespace Mission06_Serre.Models
 
         public DbSet<Category> Categories { get; set; }
 
+        // Sets up the initial data for the Category table when the database is created.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(

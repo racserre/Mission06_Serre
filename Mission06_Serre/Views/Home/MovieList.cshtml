@@ -1,12 +1,15 @@
 ﻿
 @model List<Movie>
 
+<!--This page displays all of the movies in the database-->
+
 <h1 class="text-center my-4">Movie Collection</h1>
 
 <!-- Bootstrap-styled table -->
 <table class="table table-bordered table-striped table-hover shadow-lg">
     <thead class="table-dark text-center">
         <tr>
+       <!--Column headers-->
             <th>Category</th>
             <th>Title</th>
             <th>Year</th>
@@ -21,9 +24,11 @@
     </thead>
 
     <tbody>
-        @foreach (var m in Model)
+        <!-- Iterating through each movie object in the model -->
+        @foreach (var m in Model) 
         {
             <tr>
+                <!--New row for each movie-->   
                 <td>@(m.Category?.CategoryName ?? "N/A")</td>
                 <td>@m.Title</td>
                 <td>@m.Year</td>
@@ -36,7 +41,7 @@
 
                 <!-- Action buttons for Edit and Delete -->
                 <td>
-                    <a class="btn btn-info btn-sm mx-1" asp-controller="Home" asp-action="Edit" asp-route-id="@m.MovieId">Edit</a>
+                    <a class="btn btn-primary btn-sm mx-1" asp-controller="Home" asp-action="Edit" asp-route-id="@m.MovieId">Edit</a>
                     <a class="btn btn-danger btn-sm mx-1" asp-controller="Home" asp-action="Delete" asp-route-id="@m.MovieId">Delete</a>
                 </td>
             </tr>

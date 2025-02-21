@@ -32,6 +32,7 @@ namespace Mission06_Serre.Controllers
         [HttpGet]
         public IActionResult MovieCollection()
         {
+            // Populates the dropdown list with categories, ordered alphabetically
             ViewBag.Categories = _context.Categories
                 .OrderBy(x => x.CategoryName)
                 .ToList();
@@ -48,19 +49,17 @@ namespace Mission06_Serre.Controllers
                 _context.Movies.Add(response); // Adds the new movie record to the database
                 _context.SaveChanges(); // Saves changes to the database
 
-                return RedirectToAction("MovieList"); // Redirects to confirmation page with submitted data
+                return RedirectToAction("MovieList"); // Redirects to movie list page with submitted data
             }
-
-            else //Invalid data
+            else // Invalid data submitted, reload form with categories
             {
+                // Ensures the category dropdown is populated if the form reloads due to validation errors
                 ViewBag.Categories = _context.Categories
-               .OrderBy(x => x.CategoryName)
-               .ToList();
+                    .OrderBy(x => x.CategoryName)
+                    .ToList();
 
                 return View(response);
             }
-
-           
         }
 
         // Displays the Movie Confirmation page after submission
@@ -69,56 +68,60 @@ namespace Mission06_Serre.Controllers
             return View();
         }
 
+        // Displays the list of movies with their associated categories
         public IActionResult MovieList()
         {
             var movies = _context.Movies
-                .Include(x => x.Category) //Name of the table you want to join
-                .OrderBy(x => x.Title).ToList();
+                .Include(x => x.Category) // Eager-loads related Category data to avoid lazy-loading performance issues
+                .OrderBy(x => x.Title) // Orders movies alphabetically by title
+                .ToList();
 
             return View(movies);
         }
 
+        // Handles GET request to load the Edit form with existing movie data
         [HttpGet]
         public IActionResult Edit(int id)
         {
             var recordToEdit = _context.Movies
-                .Single(x => x.MovieId == id);
+                .Single(x => x.MovieId == id); // Retrieves the movie record by ID
 
+            // Populates the category dropdown for editing
             ViewBag.Categories = _context.Categories
                 .OrderBy(x => x.CategoryName)
                 .ToList();
 
-            return View("MovieCollection", recordToEdit);
+            return View("MovieCollection", recordToEdit); // Reuses the MovieCollection view for editing
         }
 
+        // Handles POST request to update movie details
         [HttpPost]
         public IActionResult Edit(Movie updatedInfo)
         {
-            _context.Update(updatedInfo);
-            _context.SaveChanges();
+            _context.Update(updatedInfo); // Updates the movie record
+            _context.SaveChanges(); // Saves changes to the database
 
-
-            return RedirectToAction("MovieList");
-
+            return RedirectToAction("MovieList"); // Redirects to the updated movie list
         }
 
+        // Handles GET request to display a delete confirmation page
         [HttpGet]
         public IActionResult Delete(int id)
         {
             var recordToDelete = _context.Movies
-                .Single(x => x.MovieId == id);
+                .Single(x => x.MovieId == id); // Retrieves the movie to confirm deletion
 
             return View(recordToDelete);
         }
 
+        // Handles POST request to delete a movie
         [HttpPost]
         public IActionResult Delete(Movie movie)
         {
-            _context.Movies.Remove(movie);
+            _context.Movies.Remove(movie); // Removes the movie from the database
+            _context.SaveChanges(); // Saves changes
 
-            _context.SaveChanges();
-
-            return RedirectToAction("MovieList");
+            return RedirectToAction("MovieList"); // Redirects to the updated movie list
         }
     }
 }
