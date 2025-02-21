@@ -62,12 +62,6 @@ namespace Mission06_Serre.Controllers
             }
         }
 
-        // Displays the Movie Confirmation page after submission
-        public IActionResult MovieConfirmation()
-        {
-            return View();
-        }
-
         // Displays the list of movies with their associated categories
         public IActionResult MovieList()
         {
